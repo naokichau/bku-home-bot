@@ -369,7 +369,7 @@ function receivedPostback(event) {
           console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
         }
         setGetInfoMessage()
-        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " connect your sensePods on sens.io to start monitor your house. " + payload);
+        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " connect your sensePods on sens.io to start monitor your house. " );
       });
       break;
     case "VIEW_ALL_PAYLOAD":
