@@ -354,7 +354,7 @@ function receivedPostback(event) {
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
   var senderNAME;
-
+var error1;
  request({
     uri: 'https://graph.facebook.com/v2.6/' + senderID,
     qs: { fields: 'first_name',
@@ -365,6 +365,7 @@ function receivedPostback(event) {
     if (!error && response.statusCode == 200) {
 senderNAME = response.first_name;
     } else {
+      error1 = response;
       console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
     }
   }); 
@@ -377,7 +378,7 @@ senderNAME = response.first_name;
 
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
-  sendTextMessage(senderID, "Hi, " + senderNAME +" connect your sensePods on sens.io to start monitor your house.");
+  sendTextMessage(senderID, "Hi, " + error1 +" connect your sensePods on sens.io to start monitor your house.");
 }
 
 /*
