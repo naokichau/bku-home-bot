@@ -430,31 +430,30 @@ json: {
       composer_input_disabled:true,
       call_to_actions:[
         {
-          title:"My Account",
+          title:"Get all info",
+          type:"postback",
+          payload:"VIEW_ALL_PAYLOAD"
+        },
+        {
+          title:"More",
           type:"nested",
           call_to_actions:[
             {
-              title:"Pay Bill",
+              title:"Temperature",
               type:"postback",
-              payload:"PAYBILL_PAYLOAD"
+              payload:"VIEW_TEMPERATURE_PAYLOAD"
             },
             {
-              title:"History",
+              title:"Humidity",
               type:"postback",
-              payload:"HISTORY_PAYLOAD"
+              payload:"VIEW_HUMIDITY_PAYLOAD"
             },
             {
-              title:"Contact Info",
+              title:"About",
               type:"postback",
-              payload:"CONTACT_INFO_PAYLOAD"
+              payload:"VIEW_ABOUT_PAYLOAD"
             }
           ]
-        },
-        {
-          type:"web_url",
-          title:"Latest News",
-          url:"http://petershats.parseapp.com/hat-news",
-          webview_height_ratio:"full"
         }
       ]
     }
