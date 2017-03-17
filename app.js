@@ -457,9 +457,9 @@ json: {
           webview_height_ratio:"full"
         }
       ]
-    }]
-
-  }, function (error, response, body) {
+    }
+    ]
+}}, function (error, response, body) {
        
   }); 
  }
