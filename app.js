@@ -373,16 +373,16 @@ function receivedPostback(event) {
       });
       break;
     case "VIEW_ALL_PAYLOAD":
-sendTextMessage(senderID, "Work in process...");
+sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_TEMPERATURE_PAYLOAD":
-    sendTextMessage(senderID, "Work in process...");
+    sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_HUMIDITY_PAYLOAD":
-    sendTextMessage(senderID, "Work in process...");
+    sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_ABOUT_PAYLOAD":
-sendTextMessage(senderID, "Work in process...");
+sendTextMessage(senderID, "Work in progress...");
       break;
     default:
       break;
