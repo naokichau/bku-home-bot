@@ -368,7 +368,7 @@ var error1;
     } else {
       console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
     }
-  //`  sendTextMessage(senderID, error + " " + response + " " + body);
+    sendTextMessage(senderID, senderNAME);
   }); 
   // The 'payload' param is a developer-defined field which is set in a postback 
   // button for Structured Messages. 
@@ -379,7 +379,7 @@ var error1;
 
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
-  sendTextMessage(senderID, "Hi, " + senderNAME +" connect your sensePods on sens.io to start monitor your house.");
+  //sendTextMessage(senderID, "Hi, " + senderNAME +" connect your sensePods on sens.io to start monitor your house.");
 }
 
 /*
