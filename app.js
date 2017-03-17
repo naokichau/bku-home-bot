@@ -357,7 +357,7 @@ function receivedPostback(event) {
 var error1;
  request({
     uri: 'https://graph.facebook.com/v2.6/' + senderID,
-    qs: { fields: ['first_name'],
+    qs: { fields: 'first_name',
       access_token: PAGE_ACCESS_TOKEN },
     method: 'GET'
 
