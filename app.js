@@ -362,10 +362,10 @@ var error1;
     method: 'GET'
 
   }, function (error, response, body) {
+          error1 = response;
     if (!error && response.statusCode == 200) {
 senderNAME = response.first_name;
     } else {
-      error1 = response;
       console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
     }
   }); 
