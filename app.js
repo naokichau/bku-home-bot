@@ -430,7 +430,7 @@ function receivedAccountLink(event) {
         call_to_actions: [{
             title: "Get all info",
             type: "postback",
-            payload: "PAYBILL_PAYLOAD"
+            payload: "VIEW_ALL_PAYLOAD"
           },
           {
             title: "More",
@@ -438,17 +438,17 @@ function receivedAccountLink(event) {
             call_to_actions: [{
                 title: "Temperature",
                 type: "postback",
-                payload: "PAYBILL_PAYLOAD"
+                payload: "VIEW_TEMPERATURE_PAYLOAD"
               },
               {
                 title: "Humidity",
                 type: "postback",
-                payload: "PAYBILL_PAYLOAD"
+                payload: "VIEW_HUMIDITY_PAYLOAD"
               },
               {
                 title: "About",
                 type: "postback",
-                payload: "PAYBILL_PAYLOAD"
+                payload: "VIEW_ABOUT_PAYLOAD"
               }
             ]
           }
