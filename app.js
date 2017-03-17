@@ -423,43 +423,38 @@ function receivedAccountLink(event) {
     uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
     qs: {access_token: PAGE_ACCESS_TOKEN },
     method: 'POST',
-json: {
-  persistent_menu:[
-    {
-      locale:"default",
-      composer_input_disabled:true,
-      call_to_actions:[
-        {
-          title:"My blah",
-          type:"nested",
-          call_to_actions:[
-            {
-              title:"Pay Bill",
-              type:"postback",
-              payload:"PAYBILL_PAYLOAD"
-            },
-            {
-              title:"History",
-              type:"postback",
-              payload:"HISTORY_PAYLOAD"
-            },
-            {
-              title:"Contact Info",
-              type:"postback",
-              payload:"CONTACT_INFO_PAYLOAD"
-            }
-          ]
-        },
-        {
-          type:"web_url",
-          title:"Latest News",
-          url:"http://petershats.parseapp.com/hat-news",
-          webview_height_ratio:"full"
-        }
-      ]
-    }
-    ]
-}}, function (error, response, body) {
+    json: {
+      persistent_menu: [{
+        locale: "default",
+        composer_input_disabled: true,
+        call_to_actions: [{
+            title: "Get all info",
+            type: "postback",
+            payload: "PAYBILL_PAYLOAD"
+          },
+          {
+            title: "More",
+            type: "nested",
+            call_to_actions: [{
+                title: "Temperature",
+                type: "postback",
+                payload: "PAYBILL_PAYLOAD"
+              },
+              {
+                title: "Humidity",
+                type: "postback",
+                payload: "PAYBILL_PAYLOAD"
+              },
+              {
+                title: "About",
+                type: "postback",
+                payload: "PAYBILL_PAYLOAD"
+              }
+            ]
+          }
+        ]
+      }]
+    }}, function (error, response, body) {
        
   }); 
  }
