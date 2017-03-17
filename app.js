@@ -367,6 +367,7 @@ var error1;
     } else {
       console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
     }
+    setGetInfoMessage()
 sendTextMessage(senderID, "Hi, " + senderNAME.first_name +" connect your sensePods on sens.io to start monitor your house.");
   }); 
   // The 'payload' param is a developer-defined field which is set in a postback 
@@ -417,7 +418,50 @@ function receivedAccountLink(event) {
   console.log("Received account link event with for user %d with status %s " +
     "and auth code %s ", senderID, status, authCode);
 }
+ function setGetInfoMessage(){
+ request({
+    uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
+    qs: {access_token: PAGE_ACCESS_TOKEN },
+    method: 'POST',
+json: `  "persistent_menu":[
+    {
+      "locale":"default",
+      "composer_input_disabled":true,
+      "call_to_actions":[
+        {
+          "title":"My Account",
+          "type":"nested",
+          "call_to_actions":[
+            {
+              "title":"Pay Bill",
+              "type":"postback",
+              "payload":"PAYBILL_PAYLOAD"
+            },
+            {
+              "title":"History",
+              "type":"postback",
+              "payload":"HISTORY_PAYLOAD"
+            },
+            {
+              "title":"Contact Info",
+              "type":"postback",
+              "payload":"CONTACT_INFO_PAYLOAD"
+            }
+          ]
+        },
+        {
+          "type":"web_url",
+          "title":"Latest News",
+          "url":"http://petershats.parseapp.com/hat-news",
+          "webview_height_ratio":"full"
+        }
+      ]
+    }]`
 
+  }, function (error, response, body) {
+       
+  }); 
+ }
 /*
  * Send an image using the Send API.
  *
