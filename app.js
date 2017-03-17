@@ -362,13 +362,13 @@ var error1;
     method: 'GET'
 
   }, function (error, response, body) {
-          senderNAME = body.first_name;
+          senderNAME = bodyParser.json(body);
     if (!error && response.statusCode == 200) {
 
     } else {
       console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
     }
-    sendTextMessage(senderID, body.first_name);
+    sendTextMessage(senderID, senderNAME);
   }); 
   // The 'payload' param is a developer-defined field which is set in a postback 
   // button for Structured Messages. 
