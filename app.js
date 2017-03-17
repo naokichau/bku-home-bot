@@ -362,7 +362,8 @@ var error1;
     method: 'GET'
 
   }, function (error, response, body) {
-          senderNAME = bodyParser.json(body);
+          senderNAME = JSON.parse(body)
+
     if (!error && response.statusCode == 200) {
 
     } else {
