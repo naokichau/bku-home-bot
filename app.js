@@ -362,7 +362,7 @@ var error1;
     method: 'GET'
 
   }, function (error, response, body) {
-          error1 = error;
+          error1 = "blah";
     if (!error && response.statusCode == 200) {
 senderNAME = response.first_name;
     } else {
