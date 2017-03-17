@@ -353,7 +353,21 @@ function receivedPostback(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
+  var senderNAME;
 
+ request({
+    uri: 'https://graph.facebook.com/v2.6/' + senderID,
+    qs: { fields: 'first_name',
+      access_token: PAGE_ACCESS_TOKEN },
+    method: 'GET'
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+senderNAME = response.first_name;
+    } else {
+      console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
+    }
+  }); 
   // The 'payload' param is a developer-defined field which is set in a postback 
   // button for Structured Messages. 
   var payload = event.postback.payload;
@@ -363,7 +377,7 @@ function receivedPostback(event) {
 
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
-  sendTextMessage(senderID, "Hi, " + event.sender.name +" connect your sensePods on sens.io to start monitor your house.");
+  sendTextMessage(senderID, "Hi, " + senderNAME +" connect your sensePods on sens.io to start monitor your house.");
 }
 
 /*
