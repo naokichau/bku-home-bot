@@ -368,7 +368,7 @@ var error1;
     } else {
       console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
     }
-    sendTextMessage(senderID, senderNAME);
+    sendTextMessage(senderID, body);
   }); 
   // The 'payload' param is a developer-defined field which is set in a postback 
   // button for Structured Messages. 
