@@ -362,8 +362,8 @@ var error1;
     method: 'GET'
 
   }, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
           senderNAME = JSON.parse(body)
+    if (!error && response.statusCode == 200) {
     } else {
       console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
     }
