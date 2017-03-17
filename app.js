@@ -382,7 +382,7 @@ sendTextMessage(senderID, "Work in progress...");
     sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_ABOUT_PAYLOAD":
-sendTextMessage(senderID, "Work in progress...");
+sendTextMessage(senderID, "Work in progress..");
       break;
     default:
       break;
