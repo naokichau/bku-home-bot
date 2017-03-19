@@ -374,7 +374,7 @@ function receivedPostback(event) {
           console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
         }
         setGetInfoMessage()
-        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " " + recipientID + " " + senderID + " connect your sensePods on (classified) to start monitor your house. ");
+        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " " + recipientID + " connect your sensePods on (classified) to start monitor your house. ");
       });
       break;
     case "VIEW_ALL_PAYLOAD":
