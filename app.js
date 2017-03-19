@@ -935,7 +935,7 @@ msg = parseInt(results[0].attributes.humidity) + "%";
 
           break;
       }
-      sendTextMessage(senderID, msg);
+      sendTextMessage(ownerId, msg);
     },
     error: function (error) {
       err = {
@@ -943,7 +943,7 @@ msg = parseInt(results[0].attributes.humidity) + "%";
         code: error.code,
         msg: error.message
       }
-      sendTextMessage(senderID, "Sorry, there are some errors.");
+      sendTextMessage(ownerId, "Sorry, there are some errors.");
       console.log(err);
       return err;
     }
