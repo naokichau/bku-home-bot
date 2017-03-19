@@ -920,7 +920,7 @@ function callSendAPI(messageData) {
 
 function getInfoSensor(type, ownerId) {
   var query = new Parse.Query(Devices);
-  query.equalTo("owner", ownerId);
+  query.equalTo("ownerId", ownerId);
   query.find({
     success: function (results) {
       console.log(results);
