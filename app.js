@@ -947,8 +947,6 @@ function getInfoSensor(type, user) {
 // a valid certificate authority.
 app
   .listen(app.get('port'), function () {
-    Parse.initialize("sensio");
-    Parse.serverURL = 'http://sensioserver.herokuapp.com/parse';
     console.log('Node app is running on port', app.get('port'));
   });
 
