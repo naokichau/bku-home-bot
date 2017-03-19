@@ -373,7 +373,7 @@ function receivedPostback(event) {
         if (!error && response.statusCode == 200) {} else {
           console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
         }
-        setGetInfoMessage()
+        setGetInfoMessage();
         sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " connect your sensePods on (classified) to start monitor your house. ");
       });
       break;
