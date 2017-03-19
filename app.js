@@ -378,12 +378,15 @@ function receivedPostback(event) {
       });
       break;
     case "VIEW_ALL_PAYLOAD":
+    getInfoSensor(0,senderID);
       sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_TEMPERATURE_PAYLOAD":
+     getInfoSensor(1,senderID);
       sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_HUMIDITY_PAYLOAD":
+     getInfoSensor(2,senderID);
       sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_ABOUT_PAYLOAD":
@@ -913,11 +916,13 @@ function callSendAPI(messageData) {
   });
 }
 
-function getInfoSensor(type, user) {
+function getInfoSensor(type, ownerId) {
   var query = new Parse.Query(Devices);
-  query.equalTo("owner", user);
+  query.equalTo("owner", ownerId);
   query.find({
     success: function (results) {
+      console.log(results);
+      return true;
       switch (type) {
         case 0:
 
@@ -932,7 +937,6 @@ function getInfoSensor(type, user) {
 
           break;
       }
-
     },
     error: function (error) {
       err = {
