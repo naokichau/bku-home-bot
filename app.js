@@ -449,7 +449,7 @@ function setGetInfoMessage() {
           composer_input_disabled: true,
           call_to_actions: [
             {
-              title: "Get all info",
+              title: "Get all information",
               type: "postback",
               payload: "VIEW_ALL_PAYLOAD"
             }, {
