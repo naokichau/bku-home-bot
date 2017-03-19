@@ -390,6 +390,7 @@ function receivedPostback(event) {
       sendTextMessage(senderID, "Work in progress..");
       break;
     default:
+    sendTextMessage(senderID, "Sorry, there are some errors. ");
       break;
   }
 
