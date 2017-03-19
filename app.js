@@ -944,6 +944,7 @@ function getInfoSensor(type, ownerId) {
         code: error.code,
         msg:  error.message
       }
+      console.log(err);
       return err;
     }
   });
