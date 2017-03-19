@@ -15,7 +15,8 @@ const bodyParser = require('body-parser'),
   crypto = require('crypto'),
   express = require('express'),
   https = require('https'),
-  request = require('request');
+  request = require('request'),
+  Parse = require('parse/node');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -55,23 +56,27 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
   process.exit(1);
 }
 
+// variables for database
+let Devices = Parse
+  .Object
+  .extend("devices");
+
 /*
  * Use your own validation token. Check that the token used in the Webhook
  * setup is the same token used here.
  *
  */
-app
-  .get('/webhook', function (req, res) {
-    if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === VALIDATION_TOKEN) {
-      console.log("Validating webhook");
-      res
-        .status(200)
-        .send(req.query['hub.challenge']);
-    } else {
-      console.error("Failed validation. Make sure the validation tokens match.");
-      res.sendStatus(403);
-    }
-  });
+app.get('/webhook', function (req, res) {
+  if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === VALIDATION_TOKEN) {
+    console.log("Validating webhook");
+    res
+      .status(200)
+      .send(req.query['hub.challenge']);
+  } else {
+    console.error("Failed validation. Make sure the validation tokens match.");
+    res.sendStatus(403);
+  }
+});
 
 /*
  * All callbacks for Messenger are POST-ed. They will be sent to the same
@@ -369,20 +374,20 @@ function receivedPostback(event) {
           console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
         }
         setGetInfoMessage()
-        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " connect your sensePods on (classified) to start monitor your house. " );
+        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " " + recipientID + " " + senderID + " connect your sensePods on (classified) to start monitor your house. ");
       });
       break;
     case "VIEW_ALL_PAYLOAD":
-sendTextMessage(senderID, "Work in progress...");
+      sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_TEMPERATURE_PAYLOAD":
-    sendTextMessage(senderID, "Work in progress...");
+      sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_HUMIDITY_PAYLOAD":
-    sendTextMessage(senderID, "Work in progress...");
+      sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_ABOUT_PAYLOAD":
-sendTextMessage(senderID, "Work in progress..");
+      sendTextMessage(senderID, "Work in progress..");
       break;
     default:
       break;
@@ -465,7 +470,7 @@ function setGetInfoMessage() {
                   payload: "VIEW_ABOUT_PAYLOAD"
                 }
               ]
-            }
+            },
           ]
         }
       ]
@@ -907,10 +912,43 @@ function callSendAPI(messageData) {
   });
 }
 
+function getInfoSensor(type, user) {
+  var query = new Parse.Query(Devices);
+  query.equalTo("owner", user);
+  query.find({
+    success: function (results) {
+      switch (type) {
+        case 0:
+
+          break;
+        case 1:
+
+          break;
+        case 2:
+
+          break;
+        default:
+
+          break;
+      }
+
+    },
+    error: function (error) {
+      err = {
+        isErr: 1,
+        code: error.code,
+        msg:  error.message
+      }
+      return err;
+    }
+  });
+}
 // Start server Webhooks must be available via SSL with a certificate signed by
 // a valid certificate authority.
 app
   .listen(app.get('port'), function () {
+    Parse.initialize("sensio");
+    Parse.serverURL = 'http://sensioserver.herokuapp.com/parse';
     console.log('Node app is running on port', app.get('port'));
   });
 
