@@ -382,10 +382,12 @@ function receivedPostback(event) {
       sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_TEMPERATURE_PAYLOAD":
+    console.log("Get Temperature");
      getInfoSensor(1,senderID);
       sendTextMessage(senderID, "Work in progress...");
       break;
     case "VIEW_HUMIDITY_PAYLOAD":
+    console.log("Get Humidity");
      getInfoSensor(2,senderID);
       sendTextMessage(senderID, "Work in progress...");
       break;
