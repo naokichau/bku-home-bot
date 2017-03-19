@@ -378,24 +378,21 @@ function receivedPostback(event) {
       });
       break;
     case "VIEW_ALL_PAYLOAD":
-    getInfoSensor(0,senderID);
-      sendTextMessage(senderID, "Work in progress...");
+      getInfoSensor(0, senderID);
       break;
     case "VIEW_TEMPERATURE_PAYLOAD":
-    console.log("Get Temperature");
-     getInfoSensor(1,senderID);
-      sendTextMessage(senderID, "Work in progress...");
+      console.log("Get Temperature");
+      getInfoSensor(1, senderID);
       break;
     case "VIEW_HUMIDITY_PAYLOAD":
-    console.log("Get Humidity");
-     getInfoSensor(2,senderID);
-      sendTextMessage(senderID, "Work in progress...");
+      console.log("Get Humidity");
+      getInfoSensor(2, senderID);
       break;
     case "VIEW_ABOUT_PAYLOAD":
       sendTextMessage(senderID, "Work in progress..");
       break;
     default:
-    sendTextMessage(senderID, "Sorry, there are some errors.");
+      sendTextMessage(senderID, "Sorry, there are some errors.");
       break;
   }
 
@@ -476,7 +473,7 @@ function setGetInfoMessage() {
                   payload: "VIEW_ABOUT_PAYLOAD"
                 }
               ]
-            },
+            }
           ]
         }
       ]
@@ -923,29 +920,30 @@ function getInfoSensor(type, ownerId) {
   query.equalTo("ownerId", ownerId);
   query.find({
     success: function (results) {
-      console.log(results[0].attributes.temperature, results[0].attributes.humidity);
-      return true;
+      var msg;
       switch (type) {
         case 0:
-
+msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%";
           break;
         case 1:
-
+msg = parseInt(results[0].attributes.temperature) + " C \r\n";
           break;
         case 2:
-
+msg = parseInt(results[0].attributes.humidity) + "%";
           break;
         default:
 
           break;
       }
+      sendTextMessage(senderID, msg);
     },
     error: function (error) {
       err = {
         isErr: 1,
         code: error.code,
-        msg:  error.message
+        msg: error.message
       }
+      sendTextMessage(senderID, "Sorry, there are some errors.");
       console.log(err);
       return err;
     }
