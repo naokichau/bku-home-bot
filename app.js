@@ -923,6 +923,7 @@ function getInfoSensor(type, ownerId) {
   query.equalTo("ownerId", ownerId);
   query.find({
     success: function (results) {
+      console.log("234dvf");
       console.log("info ",results.attributes.temperature, results.attributes.humidity);
       return true;
       switch (type) {
