@@ -374,7 +374,7 @@ function receivedPostback(event) {
           console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
         }
         setGetInfoMessage()
-        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " connect your sensePods on (classified) to start monitor your house. ");
+        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " " + senderID + " connect your sensePods on (classified) to start monitor your house. ");
       });
       break;
     case "VIEW_ALL_PAYLOAD":
@@ -947,6 +947,8 @@ function getInfoSensor(type, user) {
 // a valid certificate authority.
 app
   .listen(app.get('port'), function () {
+    Parse.initialize("sensio");
+    Parse.serverURL = 'http://sensioserver.herokuapp.com/parse';
     console.log('Node app is running on port', app.get('port'));
   });
 
