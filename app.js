@@ -378,15 +378,11 @@ function receivedPostback(event) {
       });
       break;
     case "VIEW_ALL_PAYLOAD":
-      getInfoSensor(0, senderID);
+      getInfoSensor(senderID);
       break;
-    case "VIEW_TEMPERATURE_PAYLOAD":
-      console.log("Get Temperature");
-      getInfoSensor(1, senderID);
+    case "VIEW_WEATHER_PAYLOAD":
       break;
-    case "VIEW_HUMIDITY_PAYLOAD":
-      console.log("Get Humidity");
-      getInfoSensor(2, senderID);
+    case "VIEW_WEATHER_NOTI_PAYLOAD":
       break;
     case "VIEW_ABOUT_PAYLOAD":
       sendTextMessage(senderID, "Work in progress..");
@@ -452,22 +448,21 @@ function setGetInfoMessage() {
           composer_input_disabled: true,
           call_to_actions: [
             {
-              title: "Get all information",
+              title: "Get data from all tinyPods",
               type: "postback",
               payload: "VIEW_ALL_PAYLOAD"
+            },{
+              title: "Get weather forecast",
+              type: "postback",
+              payload: "VIEW_WEATHER_PAYLOAD"
             }, {
               title: "More",
               type: "nested",
-              call_to_actions: [
-                {
-                  title: "Temperature",
+              call_to_actions: [ {
+                  title: "Weather notification",
                   type: "postback",
-                  payload: "VIEW_TEMPERATURE_PAYLOAD"
-                }, {
-                  title: "Humidity",
-                  type: "postback",
-                  payload: "VIEW_HUMIDITY_PAYLOAD"
-                }, {
+                  payload: "VIEW_WEATHER_NOTI_PAYLOAD"
+                },{
                   title: "About",
                   type: "postback",
                   payload: "VIEW_ABOUT_PAYLOAD"
@@ -915,26 +910,13 @@ function callSendAPI(messageData) {
   });
 }
 
-function getInfoSensor(type, ownerId) {
+function getInfoSensor(ownerId) {
   var query = new Parse.Query(Devices);
   query.equalTo("ownerId", ownerId);
   query.find({
     success: function (results) {
       var msg;
-      switch (type) {
-        case 0:
 msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%";
-          break;
-        case 1:
-msg = parseInt(results[0].attributes.temperature) + " C \r\n";
-          break;
-        case 2:
-msg = parseInt(results[0].attributes.humidity) + "%";
-          break;
-        default:
-
-          break;
-      }
       sendTextMessage(ownerId, msg);
     },
     error: function (error) {
