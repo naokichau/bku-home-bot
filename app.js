@@ -359,7 +359,7 @@ function receivedPostback(event) {
   var payload = event.postback.payload;
   var senderNAME;
   switch (payload) {
-    case "FACEBOOK_WELCOME":
+    case "GET_STARTED_PAYLOAD":
       request({
         uri: 'https://graph.facebook.com/v2.6/' + senderID,
         qs: {
