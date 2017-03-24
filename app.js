@@ -253,71 +253,71 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
+sendTextMessage(senderID,"We not support this kind of conversation yet :)")
+  // if (messageText) {
 
-  if (messageText) {
+  //   If we receive a text message, check to see if it matches any special keywords
+  //   and send back the corresponding example. Otherwise, just echo the text we
+  //   received.
+  //   switch (messageText) {
+  //     case 'image':
+  //       sendImageMessage(senderID);
+  //       break;
 
-    // If we receive a text message, check to see if it matches any special keywords
-    // and send back the corresponding example. Otherwise, just echo the text we
-    // received.
-    switch (messageText) {
-      case 'image':
-        sendImageMessage(senderID);
-        break;
+  //     case 'gif':
+  //       sendGifMessage(senderID);
+  //       break;
 
-      case 'gif':
-        sendGifMessage(senderID);
-        break;
+  //     case 'audio':
+  //       sendAudioMessage(senderID);
+  //       break;
 
-      case 'audio':
-        sendAudioMessage(senderID);
-        break;
+  //     case 'video':
+  //       sendVideoMessage(senderID);
+  //       break;
 
-      case 'video':
-        sendVideoMessage(senderID);
-        break;
+  //     case 'file':
+  //       sendFileMessage(senderID);
+  //       break;
 
-      case 'file':
-        sendFileMessage(senderID);
-        break;
+  //     case 'button':
+  //       sendButtonMessage(senderID);
+  //       break;
 
-      case 'button':
-        sendButtonMessage(senderID);
-        break;
+  //     case 'generic':
+  //       sendGenericMessage(senderID);
+  //       break;
 
-      case 'generic':
-        sendGenericMessage(senderID);
-        break;
+  //     case 'receipt':
+  //       sendReceiptMessage(senderID);
+  //       break;
 
-      case 'receipt':
-        sendReceiptMessage(senderID);
-        break;
+  //     case 'quick reply':
+  //       sendQuickReply(senderID);
+  //       break;
 
-      case 'quick reply':
-        sendQuickReply(senderID);
-        break;
+  //     case 'read receipt':
+  //       sendReadReceipt(senderID);
+  //       break;
 
-      case 'read receipt':
-        sendReadReceipt(senderID);
-        break;
+  //     case 'typing on':
+  //       sendTypingOn(senderID);
+  //       break;
 
-      case 'typing on':
-        sendTypingOn(senderID);
-        break;
+  //     case 'typing off':
+  //       sendTypingOff(senderID);
+  //       break;
 
-      case 'typing off':
-        sendTypingOff(senderID);
-        break;
+  //     case 'account linking':
+  //       sendAccountLinking(senderID);
+  //       break;
 
-      case 'account linking':
-        sendAccountLinking(senderID);
-        break;
-
-      default:
-        sendTextMessage(senderID, messageText);
-    }
-  } else if (messageAttachments) {
-    sendTextMessage(senderID, "Message with attachment received");
-  }
+  //     default:
+  //       sendTextMessage(senderID, messageText);
+  //   }
+  // } else if (messageAttachments) {
+  //   sendTextMessage(senderID, "Message with attachment received");
+  // }
 }
 
 /*
@@ -381,8 +381,11 @@ function receivedPostback(event) {
       getInfoSensor(senderID);
       break;
     case "VIEW_WEATHER_PAYLOAD":
+    getWeather(ownerId)
+          //sendTextMessage(senderID, "In development feature");
       break;
     case "VIEW_WEATHER_NOTI_PAYLOAD":
+          sendTextMessage(senderID, "In development feature");
       break;
     case "VIEW_ABOUT_PAYLOAD":
       sendTextMessage(senderID, "Work in progress..");
@@ -645,7 +648,7 @@ function sendButtonMessage(recipientId) {
  * Send a Structured Message (Generic Message type) using the Send API.
  *
  */
-function sendGenericMessage(recipientId) {
+function sendGenericMessage(recipientId,elements) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -655,41 +658,7 @@ function sendGenericMessage(recipientId) {
         type: "template",
         payload: {
           template_type: "generic",
-          elements: [
-            {
-              title: "rift",
-              subtitle: "Next-generation virtual reality",
-              item_url: "https://www.oculus.com/en-us/rift/",
-              image_url: SERVER_URL + "/assets/rift.png",
-              buttons: [
-                {
-                  type: "web_url",
-                  url: "https://www.oculus.com/en-us/rift/",
-                  title: "Open Web URL"
-                }, {
-                  type: "postback",
-                  title: "Call Postback",
-                  payload: "Payload for first bubble"
-                }
-              ]
-            }, {
-              title: "touch",
-              subtitle: "Your Hands, Now in VR",
-              item_url: "https://www.oculus.com/en-us/touch/",
-              image_url: SERVER_URL + "/assets/touch.png",
-              buttons: [
-                {
-                  type: "web_url",
-                  url: "https://www.oculus.com/en-us/touch/",
-                  title: "Open Web URL"
-                }, {
-                  type: "postback",
-                  title: "Call Postback",
-                  payload: "Payload for second bubble"
-                }
-              ]
-            }
-          ]
+          elements: elements
         }
       }
     }
@@ -910,13 +879,51 @@ function callSendAPI(messageData) {
   });
 }
 
+function getWeather(ownerId){
+ items = [
+            {
+              title: "rift",
+              subtitle: "Next-generation virtual reality",
+              item_url: "https://www.oculus.com/en-us/rift/",
+              image_url: SERVER_URL + "/assets/rift.png",
+              buttons: [
+                {
+                  type: "web_url",
+                  url: "https://www.oculus.com/en-us/rift/",
+                  title: "Open Web URL"
+                }, {
+                  type: "postback",
+                  title: "Call Postback",
+                  payload: "Payload for first bubble"
+                }
+              ]
+            }, {
+              title: "touch",
+              subtitle: "Your Hands, Now in VR",
+              item_url: "https://www.oculus.com/en-us/touch/",
+              image_url: SERVER_URL + "/assets/touch.png",
+              buttons: [
+                {
+                  type: "web_url",
+                  url: "https://www.oculus.com/en-us/touch/",
+                  title: "Open Web URL"
+                }, {
+                  type: "postback",
+                  title: "Call Postback",
+                  payload: "Payload for second bubble"
+                }
+              ]
+            }
+          ]
+          sendGenericMessage(ownerId,items)
+}
 function getInfoSensor(ownerId) {
   var query = new Parse.Query(Devices);
   query.equalTo("ownerId", ownerId);
   query.find({
     success: function (results) {
       var msg;
-msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%";
+msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%\r\n";
       sendTextMessage(ownerId, msg);
     },
     error: function (error) {
