@@ -378,8 +378,11 @@ function receivedPostback(event) {
       });
       break;
     case "VIEW_ALL_PAYLOAD":
-    console.log("ALL");
+   try {
       getInfoSensor(senderID);
+   }catch(er){
+console.log(er)
+   }
       break;
     case "VIEW_WEATHER_PAYLOAD":
   //  getWeather(senderID)
