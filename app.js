@@ -918,12 +918,13 @@ function getWeather(ownerId){
           sendGenericMessage(ownerId,items)
 }
 function getInfoSensor(ownerId) {
-     sendTextMessage(ownerId, "tst");
   var query = new Parse.Query(Devices);
   query.equalTo("ownerId", ownerId);
   query.find({
     success: function (results) {
       var msg;
+      
+     sendTextMessage(ownerId, "tst");
 msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%\r\n";
 console.log("success");
       sendTextMessage(ownerId, msg);
