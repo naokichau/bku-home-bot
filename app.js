@@ -923,7 +923,7 @@ function getInfoSensor(ownerId) {
   query.find({
     success: function (results) {
       var msg;
-msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%\r\n";
+msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%";
 console.log(results);
       sendTextMessage(ownerId, msg);
     },
