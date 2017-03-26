@@ -253,71 +253,25 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
-sendTextMessage(senderID,"We not support this kind of conversation yet :)")
-  // if (messageText) {
-
-  //   If we receive a text message, check to see if it matches any special keywords
-  //   and send back the corresponding example. Otherwise, just echo the text we
-  //   received.
-  //   switch (messageText) {
-  //     case 'image':
-  //       sendImageMessage(senderID);
-  //       break;
-
-  //     case 'gif':
-  //       sendGifMessage(senderID);
-  //       break;
-
-  //     case 'audio':
-  //       sendAudioMessage(senderID);
-  //       break;
-
-  //     case 'video':
-  //       sendVideoMessage(senderID);
-  //       break;
-
-  //     case 'file':
-  //       sendFileMessage(senderID);
-  //       break;
-
-  //     case 'button':
-  //       sendButtonMessage(senderID);
-  //       break;
-
-  //     case 'generic':
-  //       sendGenericMessage(senderID);
-  //       break;
-
-  //     case 'receipt':
-  //       sendReceiptMessage(senderID);
-  //       break;
-
-  //     case 'quick reply':
-  //       sendQuickReply(senderID);
-  //       break;
-
-  //     case 'read receipt':
-  //       sendReadReceipt(senderID);
-  //       break;
-
-  //     case 'typing on':
-  //       sendTypingOn(senderID);
-  //       break;
-
-  //     case 'typing off':
-  //       sendTypingOff(senderID);
-  //       break;
-
-  //     case 'account linking':
-  //       sendAccountLinking(senderID);
-  //       break;
-
-  //     default:
-  //       sendTextMessage(senderID, messageText);
-  //   }
-  // } else if (messageAttachments) {
-  //   sendTextMessage(senderID, "Message with attachment received");
-  // }
+  sendTextMessage(senderID, "We not support this kind of conversation yet :)")
+  // if (messageText) {   If we receive a text message, check to see if it matches
+  // any special keywords   and send back the corresponding example. Otherwise,
+  // just echo the text we   received.   switch (messageText) {     case 'image':
+  //      sendImageMessage(senderID);       break;     case 'gif':
+  // sendGifMessage(senderID);       break;     case 'audio':
+  // sendAudioMessage(senderID);       break;     case 'video':
+  // sendVideoMessage(senderID);       break;     case 'file':
+  // sendFileMessage(senderID);       break;     case 'button':
+  // sendButtonMessage(senderID);       break;     case 'generic':
+  // sendGenericMessage(senderID);       break;     case 'receipt':
+  // sendReceiptMessage(senderID);       break;     case 'quick reply':
+  // sendQuickReply(senderID);       break;     case 'read receipt':
+  // sendReadReceipt(senderID);       break;     case 'typing on':
+  // sendTypingOn(senderID);       break;     case 'typing off':
+  // sendTypingOff(senderID);       break;     case 'account linking':
+  // sendAccountLinking(senderID);       break;     default:
+  // sendTextMessage(senderID, messageText);   } } else if (messageAttachments) {
+  //  sendTextMessage(senderID, "Message with attachment received"); }
 }
 
 /*
@@ -381,11 +335,11 @@ function receivedPostback(event) {
       getInfoSensor(senderID);
       break;
     case "VIEW_WEATHER_PAYLOAD":
-    getWeather(senderID)
-         // sendTextMessage(senderID, "In development feature");
+      getWeather(senderID)
+      // sendTextMessage(senderID, "In development feature");
       break;
     case "VIEW_WEATHER_NOTI_PAYLOAD":
-          sendTextMessage(senderID, "In development feature");
+      sendTextMessage(senderID, "In development feature");
       break;
     case "VIEW_ABOUT_PAYLOAD":
       sendTextMessage(senderID, "Work in progress..");
@@ -454,18 +408,19 @@ function setGetInfoMessage() {
               title: "Get data from all tinyPods",
               type: "postback",
               payload: "VIEW_ALL_PAYLOAD"
-            },{
+            }, {
               title: "Get weather forecast",
               type: "postback",
               payload: "VIEW_WEATHER_PAYLOAD"
             }, {
               title: "More",
               type: "nested",
-              call_to_actions: [ {
+              call_to_actions: [
+                {
                   title: "Weather notification",
                   type: "postback",
                   payload: "VIEW_WEATHER_NOTI_PAYLOAD"
-                },{
+                }, {
                   title: "About",
                   type: "postback",
                   payload: "VIEW_ABOUT_PAYLOAD"
@@ -648,7 +603,7 @@ function sendButtonMessage(recipientId) {
  * Send a Structured Message (Generic Message type) using the Send API.
  *
  */
-function sendGenericMessage(recipientId,elements) {
+function sendGenericMessage(recipientId, elements) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -879,52 +834,22 @@ function callSendAPI(messageData) {
   });
 }
 
-function getWeather(ownerId){
- var items = [
-            {
-              title: "rift",
-              subtitle: "Next-generation virtual reality",
-              item_url: "https://www.oculus.com/en-us/rift/",
-              image_url: SERVER_URL + "/assets/rift.png",
-              buttons: [
-                {
-                  type: "web_url",
-                  url: "https://www.oculus.com/en-us/rift/",
-                  title: "Open Web URL"
-                }, {
-                  type: "postback",
-                  title: "Call Postback",
-                  payload: "Payload for first bubble"
-                }
-              ]
-            }, {
-              title: "touch",
-              subtitle: "Your Hands, Now in VR",
-              item_url: "https://www.oculus.com/en-us/touch/",
-              image_url: SERVER_URL + "/assets/touch.png",
-              buttons: [
-                {
-                  type: "web_url",
-                  url: "https://www.oculus.com/en-us/touch/",
-                  title: "Open Web URL"
-                }, {
-                  type: "postback",
-                  title: "Call Postback",
-                  payload: "Payload for second bubble"
-                }
-              ]
-            }
-          ]
-          sendGenericMessage(ownerId,items)
+function getWeather(ownerId) {
+  sendTextMessage(ownerId, "In development process...")
 }
 function getInfoSensor(ownerId) {
   var query = new Parse.Query(Devices);
   query.equalTo("ownerId", ownerId);
   query.find({
     success: function (results) {
-      var msg;
-msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%";
-      sendTextMessage(ownerId, msg);
+      var items = [];
+      results.forEach(function (device) {
+        items.push({
+          title: "Device ID: " + device.id,
+          subtitle: parseInt(device.attributes.temperature) + " C \r\n" + parseInt(device.attributes.humidity) + "%"
+        })
+      }, this);
+      sendGenericMessage(ownerId, items)
     },
     error: function (error) {
       console.log(error);
