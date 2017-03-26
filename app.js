@@ -918,7 +918,7 @@ function getWeather(ownerId){
           sendGenericMessage(ownerId,items)
 }
 function getInfoSensor(ownerId) {
-  console.log("sdfsdf")
+     sendTextMessage(ownerId, "tst");
   var query = new Parse.Query(Devices);
   query.equalTo("ownerId", ownerId);
   query.find({
