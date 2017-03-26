@@ -405,7 +405,7 @@ function setGetInfoMessage() {
           composer_input_disabled: true,
           call_to_actions: [
             {
-              title: "Get data from all tinyPods",
+              title: "Get info from your senseDots",
               type: "postback",
               payload: "VIEW_ALL_PAYLOAD"
             }, {
@@ -846,7 +846,7 @@ function getInfoSensor(ownerId) {
       results.forEach(function (device) {
         items.push({
           title: "Device ID: " + device.id,
-          subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: unknow"
+          subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: unknown"
         })
       }, this);
       sendGenericMessage(ownerId, items)
