@@ -925,6 +925,7 @@ function getInfoSensor(ownerId) {
     success: function (results) {
       var msg;
 msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%\r\n";
+console.log("success");
       sendTextMessage(ownerId, msg);
     },
     error: function (error) {
