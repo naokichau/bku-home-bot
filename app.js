@@ -880,7 +880,7 @@ function callSendAPI(messageData) {
 }
 
 function getWeather(ownerId){
- items = [
+ var items = [
             {
               title: "rift",
               subtitle: "Next-generation virtual reality",
@@ -923,9 +923,7 @@ function getInfoSensor(ownerId) {
   query.find({
     success: function (results) {
       var msg;
-      console.log(results);
 msg = parseInt(results[0].attributes.temperature) + " C \r\n" + parseInt(results[0].attributes.humidity) + "%";
-
       sendTextMessage(ownerId, msg);
     },
     error: function (error) {
