@@ -381,8 +381,8 @@ function receivedPostback(event) {
       getInfoSensor(senderID);
       break;
     case "VIEW_WEATHER_PAYLOAD":
-  //  getWeather(senderID)
-          sendTextMessage(senderID, "In development feature");
+    getWeather(senderID)
+         // sendTextMessage(senderID, "In development feature");
       break;
     case "VIEW_WEATHER_NOTI_PAYLOAD":
           sendTextMessage(senderID, "In development feature");
