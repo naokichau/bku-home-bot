@@ -929,13 +929,13 @@ console.log("success");
       sendTextMessage(ownerId, msg);
     },
     error: function (error) {
+      console.log(error);
       err = {
         isErr: 1,
         code: error.code,
         msg: error.message
       }
       sendTextMessage(ownerId, "Sorry, there are some errors.");
-      console.log(err);
       return err;
     }
   });
