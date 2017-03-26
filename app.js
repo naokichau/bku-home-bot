@@ -378,11 +378,7 @@ function receivedPostback(event) {
       });
       break;
     case "VIEW_ALL_PAYLOAD":
-   try {
       getInfoSensor(senderID);
-   }catch(er){
-console.log(er)
-   }
       break;
     case "VIEW_WEATHER_PAYLOAD":
   //  getWeather(senderID)
@@ -922,6 +918,7 @@ function getWeather(ownerId){
           sendGenericMessage(ownerId,items)
 }
 function getInfoSensor(ownerId) {
+  console.log("sdfsdf")
   var query = new Parse.Query(Devices);
   query.equalTo("ownerId", ownerId);
   query.find({
