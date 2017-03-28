@@ -405,7 +405,7 @@ function setGetInfoMessage() {
           composer_input_disabled: true,
           call_to_actions: [
             {
-              title: "Get info from your senseDots",
+              title: "Get info from my senseDots",
               type: "postback",
               payload: "VIEW_ALL_PAYLOAD"
             }, {
