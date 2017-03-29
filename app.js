@@ -846,7 +846,7 @@ function getInfoSensor(ownerId) {
       results.forEach(function (device) {
         items.push({
           title: "Device ID: " + device.id,
-          subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: unknown"
+          subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: unknown \r\nLast update: " + device.updatedAt
         })
       }, this);
       sendGenericMessage(ownerId, items)
