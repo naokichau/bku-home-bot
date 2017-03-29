@@ -252,8 +252,8 @@ function receivedMessage(event) {
 
     sendTextMessage(senderID, "Quick reply tapped");
     return;
-  }
-  sendTextMessage(senderID, "We not support this kind of conversation yet :)")
+  }``
+  sendTextMessage(senderID, "¯\_(ツ)_/¯ We not support this kind of conversation yet :)")
   // if (messageText) {   If we receive a text message, check to see if it matches
   // any special keywords   and send back the corresponding example. Otherwise,
   // just echo the text we   received.   switch (messageText) {     case 'image':
