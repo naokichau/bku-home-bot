@@ -328,7 +328,7 @@ function receivedPostback(event) {
           console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
         }
         setGetInfoMessage();
-        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " connect your sensePods on (classified) to start monitor your house. ");
+        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " connect your kubus on (classified) to start monitor your house. ");
       });
       break;
     case "VIEW_ALL_PAYLOAD":
@@ -405,7 +405,7 @@ function setGetInfoMessage() {
           composer_input_disabled: true,
           call_to_actions: [
             {
-              title: "Get info from my senseDots",
+              title: "Get info from my kubus",
               type: "postback",
               payload: "VIEW_ALL_PAYLOAD"
             }, {
