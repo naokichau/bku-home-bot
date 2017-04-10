@@ -315,7 +315,7 @@ function receivedPostback(event) {
   var timeOfPostback = event.timestamp;
   var payload = event.postback.payload;
   var senderNAME;
-  if (payload.actions == "undefined"){
+  if (payload.actions === undefined){
   switch (payload) {
     case "GET_STARTED_PAYLOAD":
       request({
@@ -353,7 +353,7 @@ function receivedPostback(event) {
       break;
   }
   } else {
-     sendTextMessage(senderID, payload.actions);
+     sendTextMessage(senderID, payload);
   }
   // The 'payload' param is a developer-defined field which is set in a postback
   // button for Structured Messages.
