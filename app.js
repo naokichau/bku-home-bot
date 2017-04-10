@@ -316,7 +316,9 @@ function receivedPostback(event) {
   var payload = event.postback.payload;
   var senderNAME;
   JSON.parse(payload);
+  console.log(payload)
   if (payload.actions === undefined){
+  console.log(payload)
   switch (payload) {
     case "GET_STARTED_PAYLOAD":
       request({
