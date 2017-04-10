@@ -844,12 +844,11 @@ function getWeather(ownerId) {
 
 function getInfoSensor(ownerId) {
 
-var query = new Parse.Query(Users);
+var query = new Parse.Query(User);
   query.equalTo("facebookId", ownerId);
   query.find({
     success: function (results) {
-      console.log('success');
-console.log(results.length);
+console.log(results[0].objectId);
     },
     error: function (error) {
       console.log(error);
@@ -861,7 +860,6 @@ console.log(results.length);
       sendTextMessage(ownerId, "Sorry, there are some errors.");
     }
   });
-console.log('info');
 
 
   // var query = new Parse.Query(Devices);
