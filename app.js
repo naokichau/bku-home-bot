@@ -317,7 +317,7 @@ function receivedPostback(event) {
   var senderNAME;
   // payload = ;
   console.log(payload)
-  if (payload.length > 30){
+  if (payload.length < 30){
   switch (payload) {
     case "GET_STARTED_PAYLOAD":
       request({
