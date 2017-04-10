@@ -62,7 +62,7 @@ let Devices = Parse
   .extend("devices");
 let Users = Parse
   .Object
-  .extend("Users");
+  .extend("User");
 /*
  * Use your own validation token. Check that the token used in the Webhook
  * setup is the same token used here.
@@ -844,7 +844,7 @@ function getWeather(ownerId) {
 
 function getInfoSensor(ownerId) {
 
-var query = new Parse.Query(User);
+var query = new Parse.Query(Users);
   query.equalTo("facebookId", ownerId);
   query.find({
     success: function (results) {
