@@ -315,9 +315,9 @@ function receivedPostback(event) {
   var timeOfPostback = event.timestamp;
   var payload = event.postback.payload;
   var senderNAME;
-  // payload = JSON.parse(payload);
+  // payload = ;
   console.log(payload)
-  if (payload.actions === undefined){
+  if (payload.length > 30){
   switch (payload) {
     case "GET_STARTED_PAYLOAD":
       request({
@@ -354,7 +354,9 @@ function receivedPostback(event) {
       sendTextMessage(senderID, "Sorry, there are some errors.");
       break;
   }
-  } else {
+} else {
+  JSON.parse(payload)
+  console.log(payload);
      sendTextMessage(senderID, payload);
   }
   // The 'payload' param is a developer-defined field which is set in a postback
