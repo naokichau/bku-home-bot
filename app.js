@@ -870,6 +870,7 @@ function getInfoSensor(ownerId) {
       if (results.length == 0) {
         sendTextMessage(ownerId, "Your facebook account isn't linked yet. Please go to ... to link your account.");
       } else {
+        var places = results[0].attributes.places;
         if (places.length) {
           var items = [];
           places.forEach(function (place) {
