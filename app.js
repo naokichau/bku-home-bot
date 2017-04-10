@@ -874,13 +874,14 @@ function getInfoSensor(ownerId) {
         if (places.length) {
           var items = [];
           places.forEach(function (place) {
+            console.log(place);
             items.push({
               title: place.place,
               subtitle: "There are " + place.rooms.length + " consist of" + place.totalDevices + " devices",
               buttons: [ {
                   type: "postback",
                   title: "view all rooms",
-                  payload:json.stringify({data:place,actions:"VIEW_ROOMS"})
+                  payload: json.stringify({data:place,actions:"VIEW_ROOMS"})
                 },
                 {
                   type: "postback",
