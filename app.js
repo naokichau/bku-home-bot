@@ -354,9 +354,8 @@ function receivedPostback(event) {
       break;
   }
 } else {
-  payload = JSON.parse(payload)
-  console.log(payload);
-     sendTextMessage(senderID, payload);
+  payload = JSON.parse(payload);
+     sendTextMessage(senderID, payload.actions);
   }
   // The 'payload' param is a developer-defined field which is set in a postback
   // button for Structured Messages.
