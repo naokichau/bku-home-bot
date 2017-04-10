@@ -848,6 +848,7 @@ var query = new Parse.Query(Users);
   query.equalTo("facebookId", ownerId);
   query.find({
     success: function (results) {
+    console.log(results.length);
 if (results.length == 0) {
  sendTextMessage(ownerId, "Your facebook account isn't linked yet. Please go to ... to link your account.");
 }else{
