@@ -315,6 +315,7 @@ function receivedPostback(event) {
   var timeOfPostback = event.timestamp;
   var payload = event.postback.payload;
   var senderNAME;
+  if (payload.actions == "undefined"){
   switch (payload) {
     case "GET_STARTED_PAYLOAD":
       request({
@@ -351,7 +352,9 @@ function receivedPostback(event) {
       sendTextMessage(senderID, "Sorry, there are some errors.");
       break;
   }
-
+  } else {
+     sendTextMessage(senderID, payload.actions);
+  }
   // The 'payload' param is a developer-defined field which is set in a postback
   // button for Structured Messages.
 
@@ -877,7 +880,7 @@ function getInfoSensor(ownerId) {
             console.log(place);
             items.push({
               title: place.place,
-              subtitle: "There are " + place.rooms.length + " consist of " + place.totalDevices + " devices",
+              subtitle: "There are " + place.rooms.length + " rooms consist of " + place.totalDevices + " devices",
               buttons: [ {
                   type: "postback",
                   title: "list all rooms",
