@@ -880,12 +880,12 @@ function getInfoSensor(ownerId) {
               subtitle: "There are " + place.rooms.length + " consist of " + place.totalDevices + " devices",
               buttons: [ {
                   type: "postback",
-                  title: "view all rooms",
+                  title: "list all rooms",
                   payload: JSON.stringify({data:place,actions:"VIEW_ROOMS"})
                 },
                 {
                   type: "postback",
-                  title: "get info in each room",
+                  title: "info in each room",
                   payload:  JSON.stringify({data:place,actions:"VIEW_EACH"})
                 }
               ]
