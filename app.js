@@ -60,7 +60,9 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
 let Devices = Parse
   .Object
   .extend("devices");
-
+let Users = Parse
+  .Object
+  .extend("Users");
 /*
  * Use your own validation token. Check that the token used in the Webhook
  * setup is the same token used here.
@@ -252,12 +254,13 @@ function receivedMessage(event) {
 
     sendTextMessage(senderID, "Quick reply tapped");
     return;
-  }``
+  }
+  ``
   sendTextMessage(senderID, "¯\\_(ツ)_/¯ We not support this kind of conversation yet :)")
   // if (messageText) {   If we receive a text message, check to see if it matches
   // any special keywords   and send back the corresponding example. Otherwise,
   // just echo the text we   received.   switch (messageText) {     case 'image':
-  //      sendImageMessage(senderID);       break;     case 'gif':
+  //     sendImageMessage(senderID);       break;     case 'gif':
   // sendGifMessage(senderID);       break;     case 'audio':
   // sendAudioMessage(senderID);       break;     case 'video':
   // sendVideoMessage(senderID);       break;     case 'file':
@@ -271,7 +274,7 @@ function receivedMessage(event) {
   // sendTypingOff(senderID);       break;     case 'account linking':
   // sendAccountLinking(senderID);       break;     default:
   // sendTextMessage(senderID, messageText);   } } else if (messageAttachments) {
-  //  sendTextMessage(senderID, "Message with attachment received"); }
+  // sendTextMessage(senderID, "Message with attachment received"); }
 }
 
 /*
@@ -391,6 +394,7 @@ function receivedAccountLink(event) {
 
   console.log("Received account link event with for user %d with status %s and auth code %s ", senderID, status, authCode);
 }
+
 function setGetInfoMessage() {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
@@ -837,19 +841,15 @@ function callSendAPI(messageData) {
 function getWeather(ownerId) {
   sendTextMessage(ownerId, "In development process...")
 }
+
 function getInfoSensor(ownerId) {
-  var query = new Parse.Query(Devices);
-  query.equalTo("ownerId", ownerId);
+
+var query = new Parse.Query(Users);
+  query.equalTo("facebookId", ownerId);
   query.find({
     success: function (results) {
-      var items = [];
-      results.forEach(function (device) {
-        items.push({
-          title: "Device ID: " + device.id,
-          subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: unknown \r\nLast update: " + device.updatedAt
-        })
-      }, this);
-      sendGenericMessage(ownerId, items)
+console.log(results);
+
     },
     error: function (error) {
       console.log(error);
@@ -859,9 +859,35 @@ function getInfoSensor(ownerId) {
         msg: error.message
       }
       sendTextMessage(ownerId, "Sorry, there are some errors.");
-      return err;
     }
   });
+
+
+
+  // var query = new Parse.Query(Devices);
+  // query.equalTo("ownerId", ownerId);
+  // query.find({
+  //   success: function (results) {
+  //     var items = [];
+  //     results.forEach(function (device) {
+  //       items.push({
+  //         title: "Device ID: " + device.id,
+  //         subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: unknown \r\nLast update: " + device.updatedAt
+  //       })
+  //     }, this);
+  //     sendGenericMessage(ownerId, items)
+  //   },
+  //   error: function (error) {
+  //     console.log(error);
+  //     err = {
+  //       isErr: 1,
+  //       code: error.code,
+  //       msg: error.message
+  //     }
+  //     sendTextMessage(ownerId, "Sorry, there are some errors.");
+  //   }
+  // });
+
 }
 // Start server Webhooks must be available via SSL with a certificate signed by
 // a valid certificate authority.
