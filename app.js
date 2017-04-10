@@ -848,7 +848,7 @@ var query = new Parse.Query(Users);
   query.equalTo("facebookId", ownerId);
   query.find({
     success: function (results) {
-console.log(results);
+console.log(results[0].objectId);
 
     },
     error: function (error) {
