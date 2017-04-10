@@ -315,7 +315,7 @@ function receivedPostback(event) {
   var timeOfPostback = event.timestamp;
   var payload = event.postback.payload;
   var senderNAME;
-  JSON.parse(payload);
+  payload = JSON.parse(payload);
   console.log(payload)
   if (payload.actions === undefined){
   console.log(payload)
