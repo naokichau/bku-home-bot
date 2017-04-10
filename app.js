@@ -315,7 +315,6 @@ function receivedPostback(event) {
   var timeOfPostback = event.timestamp;
   var payload = event.postback.payload;
   var senderNAME;
-  // payload = ;
   console.log(payload)
   if (payload.length < 30){
   switch (payload) {
@@ -355,7 +354,7 @@ function receivedPostback(event) {
       break;
   }
 } else {
-  JSON.parse(payload)
+  payload = JSON.parse(payload)
   console.log(payload);
      sendTextMessage(senderID, payload);
   }
