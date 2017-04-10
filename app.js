@@ -853,12 +853,11 @@ if (results.length == 0) {
  sendTextMessage(ownerId, "Your facebook account isn't linked yet. Please go to ... to link your account.");
 }else{
 console.log(results[0].attributes.places[0].place);
- var places =  bodyParser.json(results[0].attributes.places);
  if (places.length) {
       var items = [];
       places.forEach(function (place) {
         items.push({
-          title: place.name
+          title: place.place
         })
       }, this);
       sendGenericMessage(ownerId, items)
