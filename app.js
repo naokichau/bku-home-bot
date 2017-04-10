@@ -852,9 +852,9 @@ var query = new Parse.Query(Users);
 if (results.length == 0) {
  sendTextMessage(ownerId, "Your facebook account isn't linked yet. Please go to ... to link your account.");
 }else{
-  console.log(results.attributes.places);
-  bodyParser.json(results.attributes.places);
- if (results.attributes.places.length) {
+ var places =  bodyParser.json(results[0].attributes.places);
+ console.log(places);
+ if (places.length) {
       var items = [];
       results.attributes.places.forEach(function (place) {
         items.push({
