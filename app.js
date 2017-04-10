@@ -880,12 +880,12 @@ function getInfoSensor(ownerId) {
               buttons: [ {
                   type: "postback",
                   title: "view all rooms",
-                  payload: {data:place,actions:"VIEW_ROOMS"}
+                  payload:json.stringify({data:place,actions:"VIEW_ROOMS"})
                 },
                 {
                   type: "postback",
                   title: "get info in each room",
-                  payload:  {data:place,actions:"VIEW_EACH"}
+                  payload:  json.stringify({data:place,actions:"VIEW_EACH"})
                 }
               ]
             })
