@@ -59,7 +59,7 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
 // variables for database
 let Devices = Parse
   .Object
-  .extend("devices");
+  .extend("inHouseDevices");
 let Users = Parse
   .Object
   .extend("User");
@@ -848,8 +848,22 @@ var query = new Parse.Query(Users);
   query.equalTo("facebookId", ownerId);
   query.find({
     success: function (results) {
-      console.log(results.length);
-console.log(results[0].attributes.objectId);
+if (results.length == 0) {
+ sendTextMessage(ownerId, "Your facebook account isn't linked yet. Please go to ... to link your account.");
+}else{
+
+  var query = new Parse.Query(Devices);
+  query.equalTo("ownerId",  results[0].attributes.username);
+  query.find({
+    success: function (results) {
+      var items = [];
+      results.forEach(function (device) {
+        items.push({
+          title: "Device ID: " + device.id,
+          subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: "+ device.attributes.location  +"\r\nLast update: " + device.updatedAt
+        })
+      }, this);
+      sendGenericMessage(ownerId, items)
     },
     error: function (error) {
       console.log(error);
@@ -862,30 +876,18 @@ console.log(results[0].attributes.objectId);
     }
   });
 
-
-  // var query = new Parse.Query(Devices);
-  // query.equalTo("ownerId", ownerId);
-  // query.find({
-  //   success: function (results) {
-  //     var items = [];
-  //     results.forEach(function (device) {
-  //       items.push({
-  //         title: "Device ID: " + device.id,
-  //         subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: unknown \r\nLast update: " + device.updatedAt
-  //       })
-  //     }, this);
-  //     sendGenericMessage(ownerId, items)
-  //   },
-  //   error: function (error) {
-  //     console.log(error);
-  //     err = {
-  //       isErr: 1,
-  //       code: error.code,
-  //       msg: error.message
-  //     }
-  //     sendTextMessage(ownerId, "Sorry, there are some errors.");
-  //   }
-  // });
+}
+    },
+    error: function (error) {
+      console.log(error);
+      err = {
+        isErr: 1,
+        code: error.code,
+        msg: error.message
+      }
+      sendTextMessage(ownerId, "Sorry, there are some errors.");
+    }
+  });
 
 }
 // Start server Webhooks must be available via SSL with a certificate signed by
