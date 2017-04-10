@@ -849,7 +849,7 @@ var query = new Parse.Query(Users);
   query.find({
     success: function (results) {
       console.log(results.length);
-console.log(results[0].objectId);
+console.log(results[0].attributes.username);
     },
     error: function (error) {
       console.log(error);
