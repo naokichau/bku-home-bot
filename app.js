@@ -843,7 +843,7 @@ function getWeather(ownerId) {
 }
 
 function getInfoSensor(ownerId) {
-
+console.log("test");
 var query = new Parse.Query(Users);
   query.equalTo("facebookId", ownerId);
   query.find({
