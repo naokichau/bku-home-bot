@@ -260,7 +260,7 @@ function receivedMessage(event) {
   // if (messageText) {   If we receive a text message, check to see if it matches
   // any special keywords   and send back the corresponding example. Otherwise,
   // just echo the text we   received.   switch (messageText) {     case 'image':
-  //     sendImageMessage(senderID);       break;     case 'gif':
+  //    sendImageMessage(senderID);       break;     case 'gif':
   // sendGifMessage(senderID);       break;     case 'audio':
   // sendAudioMessage(senderID);       break;     case 'video':
   // sendVideoMessage(senderID);       break;     case 'file':
@@ -607,6 +607,25 @@ function sendButtonMessage(recipientId) {
  * Send a Structured Message (Generic Message type) using the Send API.
  *
  */
+function sendListMessage(recipientId, elements) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "list",
+          elements: elements
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
 function sendGenericMessage(recipientId, elements) {
   var messageData = {
     recipient: {
@@ -843,32 +862,29 @@ function getWeather(ownerId) {
 }
 
 function getInfoSensor(ownerId) {
-console.log("test");
-var query = new Parse.Query(Users);
+  console.log("test");
+  var query = new Parse.Query(Users);
   query.equalTo("facebookId", ownerId);
   query.find({
     success: function (results) {
-    console.log(results.length);
-if (results.length == 0) {
- sendTextMessage(ownerId, "Your facebook account isn't linked yet. Please go to ... to link your account.");
-}else{
-console.log(results[0].attributes.places[0].place);
- if (places.length) {
-      var items = [];
-      places.forEach(function (place) {
-        console.log(place.place)
-        items.push({
-          title: place.place
-        })
-      }, this);
-      sendGenericMessage(ownerId, items)
-      //  subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: "+ device.attributes.location  +"\r\nLast update: " + device.updatedAt
- }
- else {
-  sendTextMessage(ownerId, "You haven't setup any devices yet.");
- }
+      if (results.length == 0) {
+        sendTextMessage(ownerId, "Your facebook account isn't linked yet. Please go to ... to link your account.");
+      } else {
+        if (places.length) {
+          var items = [];
+          places.forEach(function (place) {
+            console.log(place.place)
+            items.push({title: place.place})
+          }, this);
+          sendGenericMessage(ownerId, items)
+          //  subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC
+          // \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: "+
+          // device.attributes.location  +"\r\nLast update: " + device.updatedAt
+        } else {
+          sendTextMessage(ownerId, "You haven't setup any devices yet.");
+        }
 
-}
+      }
     },
     error: function (error) {
       console.log(error);
