@@ -874,8 +874,7 @@ function getInfoSensor(ownerId) {
         if (places.length) {
           var items = [];
           places.forEach(function (place) {
-            console.log(place.place)
-            items.push({title: place.place})
+            items.push({title: place.place,subtitle:"asdasda"})
           }, this);
           sendGenericMessage(ownerId, items)
           //  subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC
