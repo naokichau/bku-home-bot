@@ -851,30 +851,20 @@ var query = new Parse.Query(Users);
 if (results.length == 0) {
  sendTextMessage(ownerId, "Your facebook account isn't linked yet. Please go to ... to link your account.");
 }else{
-
-  var query = new Parse.Query(Devices);
-  query.equalTo("ownerId",  results[0].attributes.username);
-  query.find({
-    success: function (results) {
+  bodyParser.json(results.attributes.places);
+ if (results.attributes.places.length) {
       var items = [];
-      results.forEach(function (device) {
+      results.attributes.places.forEach(function (place) {
         items.push({
-          title: "Device ID: " + device.id,
-          subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: "+ device.attributes.location  +"\r\nLast update: " + device.updatedAt
+          title: place.name
         })
       }, this);
       sendGenericMessage(ownerId, items)
-    },
-    error: function (error) {
-      console.log(error);
-      err = {
-        isErr: 1,
-        code: error.code,
-        msg: error.message
-      }
-      sendTextMessage(ownerId, "Sorry, there are some errors.");
-    }
-  });
+      //  subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC \r\nHumidity: " + parseInt(device.attributes.humidity) + "% \r\nLocation: "+ device.attributes.location  +"\r\nLast update: " + device.updatedAt
+ }
+ else {
+  sendTextMessage(ownerId, "You haven't setup any devices yet.");
+ }
 
 }
     },
