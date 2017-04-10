@@ -856,6 +856,7 @@ console.log(results[0].attributes.places[0].place);
  if (places.length) {
       var items = [];
       places.forEach(function (place) {
+        console.log(place.place)
         items.push({
           title: place.place
         })
