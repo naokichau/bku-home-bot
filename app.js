@@ -315,6 +315,7 @@ function receivedPostback(event) {
   var timeOfPostback = event.timestamp;
   var payload = event.postback.payload;
   var senderNAME;
+  JSON.parse(payload);
   if (payload.actions === undefined){
   switch (payload) {
     case "GET_STARTED_PAYLOAD":
