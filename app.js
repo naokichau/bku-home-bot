@@ -861,7 +861,7 @@ console.log('success');
       sendTextMessage(ownerId, "Sorry, there are some errors.");
     }
   });
-
+console.log('info');
 
 
   // var query = new Parse.Query(Devices);
