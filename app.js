@@ -260,7 +260,7 @@ function receivedMessage(event) {
   // if (messageText) {   If we receive a text message, check to see if it matches
   // any special keywords   and send back the corresponding example. Otherwise,
   // just echo the text we   received.   switch (messageText) {     case 'image':
-  //    sendImageMessage(senderID);       break;     case 'gif':
+  //   sendImageMessage(senderID);       break;     case 'gif':
   // sendGifMessage(senderID);       break;     case 'audio':
   // sendAudioMessage(senderID);       break;     case 'video':
   // sendVideoMessage(senderID);       break;     case 'file':
@@ -874,7 +874,21 @@ function getInfoSensor(ownerId) {
         if (places.length) {
           var items = [];
           places.forEach(function (place) {
-            items.push({title: place.place,subtitle:"asdasda"})
+            items.push({
+              title: place.place,
+              subtitle: "There are " + place.rooms.length + " consist of" + place.totalDevices + " devices",
+              buttons: [ {
+                  type: "postback",
+                  title: "view all rooms",
+                  payload: {data:place,actions:"VIEW_ROOMS"}
+                },
+                {
+                  type: "postback",
+                  title: "get info in each room",
+                  payload:  {data:place,actions:"VIEW_EACH"}
+                }
+              ]
+            })
           }, this);
           sendGenericMessage(ownerId, items)
           //  subtitle: "Temperature: " + parseInt(device.attributes.temperature) + "ºC
