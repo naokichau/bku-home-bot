@@ -877,18 +877,7 @@ function getInfoSensor(ownerId) {
             console.log(place);
             items.push({
               title: place.place,
-              subtitle: "There are " + place.rooms.length + " consist of" + place.totalDevices + " devices",
-              buttons: [ {
-                  type: "postback",
-                  title: "view all rooms",
-                  payload: json.stringify({data:place,actions:"VIEW_ROOMS"})
-                },
-                {
-                  type: "postback",
-                  title: "get info in each room",
-                  payload:  json.stringify({data:place,actions:"VIEW_EACH"})
-                }
-              ]
+              subtitle: "There are " + place.rooms.length + " consist of" + place.totalDevices + " devices"
             })
           }, this);
           sendGenericMessage(ownerId, items)
