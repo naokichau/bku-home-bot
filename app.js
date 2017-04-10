@@ -851,6 +851,7 @@ var query = new Parse.Query(Users);
 if (results.length == 0) {
  sendTextMessage(ownerId, "Your facebook account isn't linked yet. Please go to ... to link your account.");
 }else{
+  console.log(results.attributes.places.length);
   bodyParser.json(results.attributes.places);
  if (results.attributes.places.length) {
       var items = [];
