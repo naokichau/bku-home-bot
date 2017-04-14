@@ -892,26 +892,28 @@ function viewListRooms(ownerId, data) {
       })
       i++;
       if (i % 3 == 0) {
-        rooms.push({roomPages});
+        rooms.push([roomPages]);
         roomPages = [];
-        i =0;
+        i = 0;
       }
     }, this)
-if (i<3){
-   rooms.push({roomPages});
-}
-console.log(rooms.length);
+  if (i < 3) {
+    rooms.push([roomPages]);
+  }
+  console.log(rooms.length);
   rooms.forEach(function (roomPage) {
-items.push({
-              title: "Page " + rooms.indexOf(roomPage) + 1,
-             buttons:[{
-        type: "postback",
-        title: roomPage[0].title,
-        payload: roomPage[0].payload
-      }]
-            })
-        sendGenericMessage(ownerId, items);
-        items = [];
+    items.push({
+      title: "Page " + rooms.indexOf(roomPage) + 1,
+      buttons: [
+        {
+          type: "postback",
+          title: roomPage[0].title,
+          payload: roomPage[0].payload
+        }
+      ]
+    })
+    sendGenericMessage(ownerId, items);
+    items = [];
   }, this);
 
 }
