@@ -891,7 +891,7 @@ function viewListRooms(ownerId, data) {
         payload: JSON.stringify({data: room, actions: "VIEW_ROOM"})
       })
       i++;
-      if (i % 3) {
+      if (i % 3 == 0) {
         rooms.push({roomPage});
         roomPage = [];
         i =0;
