@@ -900,6 +900,7 @@ function viewListRooms(ownerId, data) {
 if (i<3){
    rooms.push({roomPage});
 }
+console.log(rooms.length);
   rooms.forEach(function (roomPage) {
 items.push({
               title: "Page " + rooms.indexOf(roomPage),
