@@ -885,31 +885,42 @@ function viewListRooms(ownerId, data) {
   data
     .rooms
     .forEach(function (room) {
-      roomPages.push({
+      rooms.push({
         type: "postback",
         title: room.name,
         payload: JSON.stringify({data: room, actions: "VIEW_ROOM"})
       })
       i++;
       if (i % 3 == 0) {
-        rooms.push([roomPages]);
-        roomPages = [];
+        roomPages.push({
+          title: "Page 0",
+          buttons: rooms
+        });
+        rooms = [];
         i = 0;
       }
     }, this)
-  if (i < 3) {
-    rooms.push([roomPages]);
+  if (i < 3 && i!=0) {
+    roomPages.push({
+          title: "Page 0",
+          buttons: rooms
+        });
+        i = 0;
   }
-  console.log(rooms.length);
-  rooms.forEach(function (roomPage) {
-    items.push({
-      title: "Page " + rooms.indexOf(roomPage) + 1,
-      buttons: roomPage
-    })
+  console.log(roomPages.length);
+  roomPages.forEach(function (roomPage) {
+    items.push(roomPage);
+     i++;
+      if (i % 10 == 0) {
     sendGenericMessage(ownerId, items);
-    items = [];
+        items = [];
+        i = 0;
+      }
   }, this);
-
+  if (i < 10 && i!=0) {
+ sendGenericMessage(ownerId, items);
+        i = 0;
+  }
 }
 
 function viewInfoRooms(ownerId, data) {
