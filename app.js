@@ -904,13 +904,7 @@ function viewListRooms(ownerId, data) {
   rooms.forEach(function (roomPage) {
     items.push({
       title: "Page " + rooms.indexOf(roomPage) + 1,
-      buttons: [
-        {
-          type: "postback",
-          title: roomPage[0].title,
-          payload: roomPage[0].payload
-        }
-      ]
+      buttons: roomPage
     })
     sendGenericMessage(ownerId, items);
     items = [];
