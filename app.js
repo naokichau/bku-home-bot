@@ -260,7 +260,7 @@ function receivedMessage(event) {
   // if (messageText) {   If we receive a text message, check to see if it matches
   // any special keywords   and send back the corresponding example. Otherwise,
   // just echo the text we   received.   switch (messageText) {     case 'image':
-  //   sendImageMessage(senderID);       break;     case 'gif':
+  //  sendImageMessage(senderID);       break;     case 'gif':
   // sendGifMessage(senderID);       break;     case 'audio':
   // sendAudioMessage(senderID);       break;     case 'video':
   // sendVideoMessage(senderID);       break;     case 'file':
@@ -316,46 +316,56 @@ function receivedPostback(event) {
   var payload = event.postback.payload;
   var senderNAME;
   console.log(payload)
-  if (payload.length < 30){
-  switch (payload) {
-    case "GET_STARTED_PAYLOAD":
-      request({
-        uri: 'https://graph.facebook.com/v2.6/' + senderID,
-        qs: {
-          fields: 'first_name',
-          access_token: PAGE_ACCESS_TOKEN
-        },
-        method: 'GET'
+  if (payload.length < 30) {
+    switch (payload) {
+      case "GET_STARTED_PAYLOAD":
+        request({
+          uri: 'https://graph.facebook.com/v2.6/' + senderID,
+          qs: {
+            fields: 'first_name',
+            access_token: PAGE_ACCESS_TOKEN
+          },
+          method: 'GET'
 
-      }, function (error, response, body) {
-        senderNAME = JSON.parse(body)
-        if (!error && response.statusCode == 200) {} else {
-          console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
-        }
-        setGetInfoMessage();
-        sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " connect your kubus on (classified) to start monitor your house. ");
-      });
-      break;
-    case "VIEW_ALL_PAYLOAD":
-      getInfoSensor(senderID);
-      break;
-    case "VIEW_WEATHER_PAYLOAD":
-      getWeather(senderID)
-      // sendTextMessage(senderID, "In development feature");
-      break;
-    case "VIEW_WEATHER_NOTI_PAYLOAD":
-      sendTextMessage(senderID, "In development feature");
-      break;
-    case "VIEW_ABOUT_PAYLOAD":
-      sendTextMessage(senderID, "Work in progress..");
-      break;
-    default:
-      sendTextMessage(senderID, "Sorry, there are some errors.");
-      break;
-  }
-} else {
-  payload = JSON.parse(payload);
-     sendTextMessage(senderID, payload.actions);
+        }, function (error, response, body) {
+          senderNAME = JSON.parse(body)
+          if (!error && response.statusCode == 200) {} else {
+            console.error("Failed calling API", response.statusCode, response.statusMessage, body.error);
+          }
+          setGetInfoMessage();
+          sendTextMessage(senderID, "Hi, " + senderNAME.first_name + " connect your kubus on (classified) to start monitor your house. ");
+        });
+        break;
+      case "VIEW_ALL_PAYLOAD":
+        getInfoSensor(senderID);
+        break;
+      case "VIEW_WEATHER_PAYLOAD":
+        getWeather(senderID)
+        // sendTextMessage(senderID, "In development feature");
+        break;
+      case "VIEW_WEATHER_NOTI_PAYLOAD":
+        sendTextMessage(senderID, "In development feature");
+        break;
+      case "VIEW_ABOUT_PAYLOAD":
+        sendTextMessage(senderID, "Work in progress..");
+        break;
+      default:
+        sendTextMessage(senderID, "Sorry, there are some errors.");
+        break;
+    }
+  } else {
+    payload = JSON.parse(payload);
+    switch (payload.actions) {
+      case "VIEW_ROOMS":
+      viewListRooms(senderID,payload.data);
+        break;
+      case "VIEW_EACH":
+       viewInfoRooms(senderID,payload.data);
+        break;
+      default:
+        sendTextMessage(senderID, "Sorry, there are some errors.");
+        break;
+    }
   }
   // The 'payload' param is a developer-defined field which is set in a postback
   // button for Structured Messages.
@@ -865,7 +875,19 @@ function callSendAPI(messageData) {
 function getWeather(ownerId) {
   sendTextMessage(ownerId, "In development process...")
 }
+function viewListRooms(ownerId, data) {
+  console.log(data.rooms.length);
+  // setTimeout(function () {
+  //   sendGenericMessage(ownerId, items)
+  // }, 700);
+}
+function viewInfoRooms(ownerId, data) {
 
+  setTimeout(function () {
+    sendGenericMessage(ownerId, items)
+  }, 700);
+
+}
 function getInfoSensor(ownerId) {
   console.log("test");
   var query = new Parse.Query(Users);
@@ -883,15 +905,15 @@ function getInfoSensor(ownerId) {
             items.push({
               title: place.place,
               subtitle: "There are " + place.rooms.length + " rooms consist of " + place.totalDevices + " devices",
-              buttons: [ {
-                  type: "postback",
-                  title: "list all rooms",
-                  payload: JSON.stringify({data:place,actions:"VIEW_ROOMS"})
-                },
+              buttons: [
                 {
                   type: "postback",
+                  title: "list all rooms",
+                  payload: JSON.stringify({data: place, actions: "VIEW_ROOMS"})
+                }, {
+                  type: "postback",
                   title: "info in each room",
-                  payload:  JSON.stringify({data:place,actions:"VIEW_EACH"})
+                  payload: JSON.stringify({data: place, actions: "VIEW_EACH"})
                 }
               ]
             })
