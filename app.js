@@ -963,10 +963,6 @@ function getInfoSensor(ownerId) {
                   type: "postback",
                   title: "info in each room",
                   payload: JSON.stringify({data: place, actions: "VIEW_EACH"})
-                }, {
-                  type: "postback",
-                  title: "info in each room",
-                  payload: JSON.stringify({data: place, actions: "VIEW_EACH"})
                 }
               ]
             })
