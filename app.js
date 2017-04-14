@@ -904,8 +904,11 @@ console.log(rooms.length);
   rooms.forEach(function (roomPage) {
 items.push({
               title: "Page " + rooms.indexOf(roomPage) + 1,
-             subtitle: JSON.stringify(roomPage)
-             // buttons: roomPage
+             buttons:[{
+        type: "postback",
+        title: roomPage[0].title,
+        payload: roomPage[0].payload
+      }]
             })
         sendGenericMessage(ownerId, items);
         items = [];
