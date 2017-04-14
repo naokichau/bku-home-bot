@@ -880,7 +880,7 @@ function viewListRooms(ownerId, data) {
   console.log(data.rooms.length);
   var rooms = [],
     roomPages = [],
-    i = 1,
+    i = 0,
     items = [];
   data
     .rooms
@@ -955,10 +955,6 @@ function getInfoSensor(ownerId) {
                   type: "postback",
                   title: "list all rooms",
                   payload: JSON.stringify({data: place, actions: "VIEW_ROOMS"})
-                }, {
-                  type: "postback",
-                  title: "info in each room",
-                  payload: JSON.stringify({data: place, actions: "VIEW_EACH"})
                 }, {
                   type: "postback",
                   title: "info in each room",
