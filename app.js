@@ -904,7 +904,7 @@ console.log(rooms.length);
   rooms.forEach(function (roomPage) {
 items.push({
               title: "Page " + rooms.indexOf(roomPage),
-             subtitle: roomPage.length
+             subtitle: "test"
              // buttons: roomPage
             })
         sendGenericMessage(ownerId, items);
