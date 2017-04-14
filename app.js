@@ -260,7 +260,7 @@ function receivedMessage(event) {
   // if (messageText) {   If we receive a text message, check to see if it matches
   // any special keywords   and send back the corresponding example. Otherwise,
   // just echo the text we   received.   switch (messageText) {     case 'image':
-  //  sendImageMessage(senderID);       break;     case 'gif':
+  // sendImageMessage(senderID);       break;     case 'gif':
   // sendGifMessage(senderID);       break;     case 'audio':
   // sendAudioMessage(senderID);       break;     case 'video':
   // sendVideoMessage(senderID);       break;     case 'file':
@@ -357,10 +357,10 @@ function receivedPostback(event) {
     payload = JSON.parse(payload);
     switch (payload.actions) {
       case "VIEW_ROOMS":
-      viewListRooms(senderID,payload.data);
+        viewListRooms(senderID, payload.data);
         break;
       case "VIEW_EACH":
-       viewInfoRooms(senderID,payload.data);
+        viewInfoRooms(senderID, payload.data);
         break;
       default:
         sendTextMessage(senderID, "Sorry, there are some errors.");
@@ -875,12 +875,42 @@ function callSendAPI(messageData) {
 function getWeather(ownerId) {
   sendTextMessage(ownerId, "In development process...")
 }
+
 function viewListRooms(ownerId, data) {
   console.log(data.rooms.length);
-  // setTimeout(function () {
-  //   sendGenericMessage(ownerId, items)
-  // }, 700);
+  var rooms = [],
+    roomPage = [],
+    i = 1,
+    items = [];
+  data
+    .rooms
+    .forEach(function (room) {
+      roomPage.push({
+        type: "postback",
+        title: room.name,
+        payload: JSON.stringify({data: room, actions: "VIEW_ROOM"})
+      })
+      i++;
+      if (i % 3) {
+        rooms.push({roomPage});
+        roomPage = [];
+        i =0;
+      }
+    }, this)
+if (i<3){
+   rooms.push({roomPage});
 }
+  rooms.forEach(function (roomPage) {
+items.push({
+              title: "Page " + rooms.indexOf(roomPage),
+              buttons: roomPage
+            })
+        sendGenericMessage(ownerId, items);
+        items = [];
+  }, this);
+
+}
+
 function viewInfoRooms(ownerId, data) {
 
   setTimeout(function () {
@@ -888,6 +918,7 @@ function viewInfoRooms(ownerId, data) {
   }, 700);
 
 }
+
 function getInfoSensor(ownerId) {
   console.log("test");
   var query = new Parse.Query(Users);
