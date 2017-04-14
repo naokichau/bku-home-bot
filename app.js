@@ -903,8 +903,8 @@ if (i<3){
 console.log(rooms.length);
   rooms.forEach(function (roomPage) {
 items.push({
-              title: "Page " + rooms.indexOf(roomPage),
-             subtitle: "test"
+              title: "Page " + rooms.indexOf(roomPage) + 1,
+             subtitle: JSON.stringify(roomPage)
              // buttons: roomPage
             })
         sendGenericMessage(ownerId, items);
