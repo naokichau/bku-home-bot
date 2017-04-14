@@ -892,8 +892,9 @@ function viewListRooms(ownerId, data) {
       })
       i++;
       if (i == 3) {
+          var rmlength = roomPages.length + 1;
         roomPages.push({
-          title: "Page " + roomPages.length + 1,
+          title: "Page " + rmlength,
           buttons: rooms
         });
         rooms = [];
@@ -901,8 +902,9 @@ function viewListRooms(ownerId, data) {
       }
     }, this)
   if (i < 3 && i!=0) {
+    var rmlength = roomPages.length + 1;
     roomPages.push({
-          title: "Page " + roomPages.length + 1,
+          title: "Page " + rmlength,
           buttons: rooms
         });
         i = 0;
@@ -953,6 +955,14 @@ function getInfoSensor(ownerId) {
                   type: "postback",
                   title: "list all rooms",
                   payload: JSON.stringify({data: place, actions: "VIEW_ROOMS"})
+                }, {
+                  type: "postback",
+                  title: "info in each room",
+                  payload: JSON.stringify({data: place, actions: "VIEW_EACH"})
+                }, {
+                  type: "postback",
+                  title: "info in each room",
+                  payload: JSON.stringify({data: place, actions: "VIEW_EACH"})
                 }, {
                   type: "postback",
                   title: "info in each room",
