@@ -893,7 +893,7 @@ function viewListRooms(ownerId, data) {
       i++;
       if (i % 3 == 0) {
         roomPages.push({
-          title: "Page 0",
+          title: "Page " + roomPages.length + 1,
           buttons: rooms
         });
         rooms = [];
@@ -902,7 +902,7 @@ function viewListRooms(ownerId, data) {
     }, this)
   if (i < 3 && i!=0) {
     roomPages.push({
-          title: "Page 0",
+          title: "Page " + roomPages.length + 1,
           buttons: rooms
         });
         i = 0;
