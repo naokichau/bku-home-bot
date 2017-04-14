@@ -879,32 +879,33 @@ function getWeather(ownerId) {
 function viewListRooms(ownerId, data) {
   console.log(data.rooms.length);
   var rooms = [],
-    roomPage = [],
+    roomPages = [],
     i = 1,
     items = [];
   data
     .rooms
     .forEach(function (room) {
-      roomPage.push({
+      roomPages.push({
         type: "postback",
         title: room.name,
         payload: JSON.stringify({data: room, actions: "VIEW_ROOM"})
       })
       i++;
       if (i % 3 == 0) {
-        rooms.push({roomPage});
-        roomPage = [];
+        rooms.push({roomPages});
+        roomPages = [];
         i =0;
       }
     }, this)
 if (i<3){
-   rooms.push({roomPage});
+   rooms.push({roomPages});
 }
 console.log(rooms.length);
   rooms.forEach(function (roomPage) {
 items.push({
               title: "Page " + rooms.indexOf(roomPage),
-              buttons: roomPage
+             subtitle: roomPage.length
+             // buttons: roomPage
             })
         sendGenericMessage(ownerId, items);
         items = [];
