@@ -428,7 +428,7 @@ function setGetInfoMessage() {
           composer_input_disabled: true,
           call_to_actions: [
             {
-              title: "Get info from my kubus",
+              title: "View my places",
               type: "postback",
               payload: "VIEW_ALL_PAYLOAD"
             }, {
