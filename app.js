@@ -928,23 +928,26 @@ function viewListRooms(ownerId, data) {
 }
 function viewInfoRoom(ownerId, data) {
   var items = [];
+  var op = "new";
   var query = new Parse.Query(Devices);
   data
     .devices
     .forEach((device) => {
+
       query.get(device, {
         success: (result) =>{
+          console.log("1   " +op);
           items.push({
             title: "DeviceID: " + device,
             subtitle: "Temperature: " + parseInt(result.get("temperature")) + "ºC\r\nHumidity: " + parseInt(result.get("humidity")) + "% \r\nLocation: " + result.get("location") + "\r\nLast update: " + result.updatedAt
           })
-          console.log( "1  " + JSON.stringify(items))
         },
         error: (error) =>{
           console.log(error);
           sendTextMessage(ownerId, "Sorry, there are some errors while getting device " + device + " data.");
         }
       });
+      console.log(op);
     })
     console.log(JSON.stringify(items))
   sendGenericMessage(ownerId, items)
