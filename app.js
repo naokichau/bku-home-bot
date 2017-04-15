@@ -938,7 +938,7 @@ function viewInfoRoom(ownerId, data) {
             title: "DeviceID: " + device,
             subtitle: "Temperature: " + parseInt(result.get("temperature")) + "ºC\r\nHumidity: " + parseInt(result.get("humidity")) + "% \r\nLocation: " + result.get("location") + "\r\nLast update: " + result.updatedAt
           })
-          console.log(JSON.stringify(items))
+          console.log( "1  " + JSON.stringify(items))
         },
         error: (error) =>{
           console.log(error);
