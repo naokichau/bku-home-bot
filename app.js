@@ -931,13 +931,12 @@ function viewInfoRoom(ownerId, data) {
   var query = new Parse.Query(Devices);
   data
     .devices
-    .forEach(function (device) {
+    .forEach((device) => {
       query.get(device, {
         success: function (result) {
           items.push({
-            title: "DeviceID: 434" ,
-            subtitle: "test 123"
-            // subtitle: "Temperature: " + parseInt(result.temperature) + "ºC\r\nHumidity: " + parseInt(result.humidity) + "% \r\nLocation: " + result.location + "\r\nLast update: " + result.updatedAt
+            title: "DeviceID: " + device,
+            subtitle: "Temperature: " + parseInt(result.temperature) + "ºC\r\nHumidity: " + parseInt(result.humidity) + "% \r\nLocation: " + result.location + "\r\nLast update: " + result.updatedAt
           })
         },
         error: function (error) {
