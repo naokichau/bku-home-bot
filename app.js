@@ -934,13 +934,13 @@ function viewInfoRoom(ownerId, data) {
     .forEach((device) => {
       query.get(device, {
         success: (result) =>{
-          console.log(JSON.stringify(result));
           items.push({
             title: "DeviceID: " + device,
             subtitle: "Temperature: " + parseInt(result.temperature) + "ºC\r\nHumidity: " + parseInt(result.humidity) + "% \r\nLocation: " + result.location + "\r\nLast update: " + result.updatedAt
           })
+          console.log(JSON.stringify(items));
         },
-        error: function (error) {
+        error: (error) =>{
           console.log(error);
           sendTextMessage(ownerId, "Sorry, there are some errors while getting device " + device + " data.");
         }
