@@ -365,6 +365,7 @@ function receivedPostback(event) {
         break;
       case "VIEW_ROOM":
       viewInfoRoom(senderID,payload.data);
+      break;
       default:
         sendTextMessage(senderID, "Sorry, there are some errors.");
         break;
@@ -933,6 +934,7 @@ function viewInfoRoom(ownerId, data) {
       var query = new Parse.Query(Devices);
       query.get(device, {
         success: function (result) {
+          console.log(result);
           items.push({
             title: "DeviceID: " + device,
             subtitle: "Temperature: " + parseInt(result.attributes.temperature) + "ºC\r\nHumidity: " + parseInt(result.attributes.humidity) + "% \r\nLocation: " + result.attributes.location + "\r\nLast update: " + result.updatedAt
