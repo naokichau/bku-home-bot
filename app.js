@@ -928,9 +928,8 @@ function viewListRooms(ownerId, data) {
 }
 function viewInfoRoom(ownerId, data) {
   var items = [];
-  for (var i = 0; i < data.devices.length; i++) {
-    var device = data.devices[i];
-    var query = new Parse.Query(Devices);
+data.devices.forEach((device)=> {
+      var query = new Parse.Query(Devices);
       query.get(device, {
         success: (result) =>{
           items.push({
@@ -943,12 +942,10 @@ function viewInfoRoom(ownerId, data) {
           sendTextMessage(ownerId, "Sorry, there are some errors while getting device " + device + " data.");
         }
       });
-  }
-    console.log(JSON.stringify(items))
-
+})
  setTimeout(function () {
     sendGenericMessage(ownerId, items)
-  }, 3000);
+  }, 2000);
 }
 function viewInfoRooms(ownerId, data) {
 
