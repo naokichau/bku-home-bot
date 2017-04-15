@@ -934,7 +934,7 @@ function viewInfoRoom(ownerId, data) {
       var query = new Parse.Query(Devices);
       query.get(device, {
         success: function (result) {
-          console.log(result);
+          console.log(JSON.stringify(result));
           items.push({
             title: "DeviceID: " + device,
             subtitle: "Temperature: " + parseInt(result.attributes.temperature) + "ºC\r\nHumidity: " + parseInt(result.attributes.humidity) + "% \r\nLocation: " + result.attributes.location + "\r\nLast update: " + result.updatedAt
