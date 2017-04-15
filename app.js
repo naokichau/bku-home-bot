@@ -934,6 +934,7 @@ function viewInfoRoom(ownerId, data) {
     .forEach((device) => {
       query.get(device, {
         success: (result) =>{
+          console.log(JSON.stringify(result));
           console.log(result.objectId);
           items.push({
             title: "DeviceID: " + device,
