@@ -928,15 +928,11 @@ function viewListRooms(ownerId, data) {
 }
 function viewInfoRoom(ownerId, data) {
   var items = [];
-  var op = "new";
-  var query = new Parse.Query(Devices);
-  data
-    .devices
-    .forEach((device) => {
-
+  for (var i = 0; i < data.devices.length; i++) {
+    var device = data.devices[i];
+    var query = new Parse.Query(Devices);
       query.get(device, {
         success: (result) =>{
-          console.log("1   " +op);
           items.push({
             title: "DeviceID: " + device,
             subtitle: "Temperature: " + parseInt(result.get("temperature")) + "ºC\r\nHumidity: " + parseInt(result.get("humidity")) + "% \r\nLocation: " + result.get("location") + "\r\nLast update: " + result.updatedAt
@@ -947,8 +943,8 @@ function viewInfoRoom(ownerId, data) {
           sendTextMessage(ownerId, "Sorry, there are some errors while getting device " + device + " data.");
         }
       });
+  }
     console.log(JSON.stringify(items))
-    })
   sendGenericMessage(ownerId, items)
 }
 function viewInfoRooms(ownerId, data) {
