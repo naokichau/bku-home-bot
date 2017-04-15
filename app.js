@@ -935,7 +935,7 @@ function viewInfoRoom(ownerId, data) {
       query.get(device, {
         success: function (result) {
           items.push({
-            title: "DeviceID: " + device,
+            title: "DeviceID: 434" ,
             subtitle: "test 123"
             // subtitle: "Temperature: " + parseInt(result.temperature) + "ºC\r\nHumidity: " + parseInt(result.humidity) + "% \r\nLocation: " + result.location + "\r\nLast update: " + result.updatedAt
           })
@@ -947,7 +947,6 @@ function viewInfoRoom(ownerId, data) {
       });
     })
   sendGenericMessage(ownerId, items)
-
 }
 function viewInfoRooms(ownerId, data) {
 
