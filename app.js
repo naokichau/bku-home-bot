@@ -928,15 +928,22 @@ function viewListRooms(ownerId, data) {
 }
 function viewInfoRoom(ownerId, data) {
   var items = [];
+  var query = new Parse.Query(Devices);
   data
     .devices
     .forEach(function (device) {
-      var query = new Parse.Query(Devices);
       query.get(device, {
         success: function (result) {
           items.push({
-            title: "DeviceID: 434" ,
-            subtitle: "test 123"
+            title: "DeviceID: 433",
+            subtitle: "test 123",
+             buttons: [
+                {
+                  type: "postback",
+                  title: "list all rooms",
+                  payload: "TEST",
+                }
+              ]
             // subtitle: "Temperature: " + parseInt(result.temperature) + "ºC\r\nHumidity: " + parseInt(result.humidity) + "% \r\nLocation: " + result.location + "\r\nLast update: " + result.updatedAt
           })
         },
