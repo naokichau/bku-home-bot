@@ -945,7 +945,10 @@ function viewInfoRoom(ownerId, data) {
       });
   }
     console.log(JSON.stringify(items))
-  sendGenericMessage(ownerId, items)
+
+ setTimeout(function () {
+    sendGenericMessage(ownerId, items)
+  }, 3000);
 }
 function viewInfoRooms(ownerId, data) {
 
