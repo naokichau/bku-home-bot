@@ -949,7 +949,6 @@ function viewInfoRoom(ownerId, data) {
       });
     console.log(JSON.stringify(items))
     })
-    console.log(JSON.stringify(items))
   sendGenericMessage(ownerId, items)
 }
 function viewInfoRooms(ownerId, data) {
