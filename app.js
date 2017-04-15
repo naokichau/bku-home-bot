@@ -362,6 +362,8 @@ function receivedPostback(event) {
       case "VIEW_EACH":
         viewInfoRooms(senderID, payload.data);
         break;
+      case "VIEW_ROOM":
+      viewInfoRoom(senderID,payload.data);
       default:
         sendTextMessage(senderID, "Sorry, there are some errors.");
         break;
@@ -892,7 +894,7 @@ function viewListRooms(ownerId, data) {
       })
       i++;
       if (i == 3) {
-          var rmlength = roomPages.length + 1;
+        var rmlength = roomPages.length + 1;
         roomPages.push({
           title: "Page " + rmlength,
           buttons: rooms
@@ -901,30 +903,51 @@ function viewListRooms(ownerId, data) {
         i = 0;
       }
     }, this)
-  if (i < 3 && i!=0) {
+  if (i < 3 && i != 0) {
     var rmlength = roomPages.length + 1;
     roomPages.push({
-          title: "Page " + rmlength,
-          buttons: rooms
-        });
-        i = 0;
+      title: "Page " + rmlength,
+      buttons: rooms
+    });
+    i = 0;
   }
   console.log(roomPages.length);
   roomPages.forEach(function (roomPage) {
     items.push(roomPage);
-     i++;
-      if (i % 10 == 0) {
-    sendGenericMessage(ownerId, items);
-        items = [];
-        i = 0;
-      }
+    i++;
+    if (i % 10 == 0) {
+      sendGenericMessage(ownerId, items);
+      items = [];
+      i = 0;
+    }
   }, this);
-  if (i < 10 && i!=0) {
- sendGenericMessage(ownerId, items);
-        i = 0;
+  if (i < 10 && i != 0) {
+    sendGenericMessage(ownerId, items);
+    i = 0;
   }
 }
+function viewInfoRoom(ownerId, data) {
+  var items = [];
+  data
+    .devices
+    .forEach(function (device) {
+      var query = new Parse.Query(Devices);
+      query.get(device, {
+        success: function (result) {
+          items.push({
+            title: "DeviceID: " + device,
+            subtitle: "Temperature: " + parseInt(result.attributes.temperature) + "ºC\r\nHumidity: " + parseInt(result.attributes.humidity) + "% \r\nLocation: " + result.attributes.location + "\r\nLast update: " + result.updatedAt
+          })
+        },
+        error: function (error) {
+          console.log(error);
+          sendTextMessage(ownerId, "Sorry, there are some errors while getting device " + device + " data.");
+        }
+      });
+    })
+  sendGenericMessage(ownerId, items)
 
+}
 function viewInfoRooms(ownerId, data) {
 
   setTimeout(function () {
@@ -975,11 +998,6 @@ function getInfoSensor(ownerId) {
     },
     error: function (error) {
       console.log(error);
-      err = {
-        isErr: 1,
-        code: error.code,
-        msg: error.message
-      }
       sendTextMessage(ownerId, "Sorry, there are some errors.");
     }
   });
