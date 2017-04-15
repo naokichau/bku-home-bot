@@ -947,7 +947,7 @@ function viewInfoRoom(ownerId, data) {
           sendTextMessage(ownerId, "Sorry, there are some errors while getting device " + device + " data.");
         }
       });
-      console.log(op);
+    console.log(JSON.stringify(items))
     })
     console.log(JSON.stringify(items))
   sendGenericMessage(ownerId, items)
