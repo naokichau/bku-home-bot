@@ -933,7 +933,7 @@ function viewInfoRoom(ownerId, data) {
     .devices
     .forEach((device) => {
       query.get(device, {
-        success: function (result) {
+        success: (result) =>{
           items.push({
             title: "DeviceID: " + device,
             subtitle: "Temperature: " + parseInt(result.temperature) + "ºC\r\nHumidity: " + parseInt(result.humidity) + "% \r\nLocation: " + result.location + "\r\nLast update: " + result.updatedAt
