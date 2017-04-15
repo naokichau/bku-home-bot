@@ -355,6 +355,7 @@ function receivedPostback(event) {
     }
   } else {
     payload = JSON.parse(payload);
+    console.log(payload.actions);
     switch (payload.actions) {
       case "VIEW_ROOMS":
         viewListRooms(senderID, payload.data);
@@ -879,7 +880,6 @@ function getWeather(ownerId) {
 }
 
 function viewListRooms(ownerId, data) {
-  console.log(data.rooms.length);
   var rooms = [],
     roomPages = [],
     i = 0,
@@ -911,7 +911,6 @@ function viewListRooms(ownerId, data) {
     });
     i = 0;
   }
-  console.log(roomPages.length);
   roomPages.forEach(function (roomPage) {
     items.push(roomPage);
     i++;
